@@ -1,10 +1,19 @@
 import Link from "next/link";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const products = await res.json();
+  let products = [];
+
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+
+    if (res.ok) {
+      products = await res.json();
+    }
+  } catch (e) {
+    products = [];
+  }
 
   return (
     <div>

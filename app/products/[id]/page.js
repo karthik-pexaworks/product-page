@@ -5,7 +5,6 @@ export async function generateStaticParams() {
     const res = await fetch("https://fakestoreapi.com/products");
 
     if (!res.ok) {
-      // API failed → avoid build crash
       return [];
     }
 
@@ -13,7 +12,6 @@ export async function generateStaticParams() {
 
     return products.map((p) => ({ id: String(p.id) }));
   } catch (err) {
-    // API unreachable → avoid build crash
     return [];
   }
 }
